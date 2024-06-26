@@ -11,6 +11,8 @@ https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 **商城后台后端搭建**
 
 ```
+插件安装 Lombok
+
 git clone https://github.com/macrozheng/mall
 
 删掉 mall/.git 避免仓库嵌套问题
@@ -36,4 +38,15 @@ spring:
 重启mall-admin/src/main/java/com/macro/mall/MallAdminApplication.java
 
 访问 接口文档 http://localhost:8080/swagger-ui/
+```
+
+**商城后台前端项目搭建**
+
+```
+部署文档 https://github.com/macrozheng/mall-admin-web
+
+git clone https://github.com/macrozheng/mall-admin-web
+或 git clone git@github.com:macrozheng/mall-admin-web.git
+
+删掉mall-admin-web\.git避免仓库嵌套
 ```

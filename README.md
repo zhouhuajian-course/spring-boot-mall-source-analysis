@@ -49,4 +49,50 @@ git clone https://github.com/macrozheng/mall-admin-web
 或 git clone git@github.com:macrozheng/mall-admin-web.git
 
 删掉mall-admin-web\.git避免仓库嵌套
+
+下载node并安装：https://nodejs.org/dist/v12.14.0/node-v12.14.0-x64.msi
+备注：不能安装最新版本，安装文档的版本来
+
+cd mall-admin-web
+npm install 下载依赖
+npm run dev 运行项目
+访问 http://localhost:8090
+
+初始账号admin密码macro123
+```
+
+**前台后端项目搭建**
+
+```
+文档 https://github.com/macrozheng/mall-app-web
+
+启动 mall-portal/src/main/java/com/macro/mall/portal/MallPortalApplication.java
+
+数据库报错 修改数据库配置
+application-dev.yml
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+#    password: root
+    password: 
+重启
+
+2024-06-26 18:17:07.619  INFO 26224 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8085 (http)
+2024-06-26 18:17:07.631  INFO 26224 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+
+MongoDB RabbitMQ 报错   
+
+```
+
+**商城前台前端项目搭建**
+
+```
+git clone git@github.com:macrozheng/mall-app-web.git
+
+删除mall-app-web/.git
+
+本项目使用了uni-app专用开发工具HBuilder X（App开发版）开发，下载地址：https://www.dcloud.io/hbuilderx.html
+HBuilderX打开mall-app-web.
+
 ```

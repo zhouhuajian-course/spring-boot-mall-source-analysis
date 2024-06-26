@@ -82,17 +82,20 @@ spring:
 2024-06-26 18:17:07.631  INFO 26224 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
 
 MongoDB RabbitMQ 报错   
-
+需要时再修复
 ```
 
 **商城前台前端项目搭建**
 
 ```
+文档 https://github.com/macrozheng/mall-app-web
+
 git clone git@github.com:macrozheng/mall-app-web.git
 
 删除mall-app-web/.git
 
 本项目使用了uni-app专用开发工具HBuilder X（App开发版）开发，下载地址：https://www.dcloud.io/hbuilderx.html
 HBuilderX打开mall-app-web.
-
+运行->运行到浏览器->Chrome，会自动访问http://localhost:8060/#/
+开发者工具 -> 浏览器改为手机模式
 ```

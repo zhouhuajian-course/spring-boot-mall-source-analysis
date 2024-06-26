@@ -13,6 +13,8 @@ https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 ```
 git clone https://github.com/macrozheng/mall
 
+删掉 mall/.git 避免仓库嵌套问题
+
 File -> Project Structure -> + -> Import module -> 选择 mall 的 pom.xml
 
 mall-admin

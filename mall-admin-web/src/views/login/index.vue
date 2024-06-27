@@ -40,9 +40,9 @@
           <el-button style="width: 45%" type="primary" :loading="loading" @click.native.prevent="handleLogin">
             登录
           </el-button>
-          <el-button style="width: 45%" type="primary" @click.native.prevent="handleTry">
+          <!-- <el-button style="width: 45%" type="primary" @click.native.prevent="handleTry">
             获取体验账号
-          </el-button>
+          </el-button> -->
         </el-form-item>
       </el-form>
     </el-card>

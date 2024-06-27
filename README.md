@@ -6,6 +6,69 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 数据库表
+
+https://www.macrozheng.com/mall/foreword/mall_foreword_01.html#mall%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E6%A6%82%E8%A7%88
+
+```
+数据库表前缀说明
+cms_*：内容管理模块相关表  (content)
+oms_*：订单管理模块相关表  (order)
+pms_*：商品模块相关表    (product)
+sms_*：营销模块相关表
+ums_*：会员模块相关表  (user)
+
+ms可能是manage system
+```
+
+## 修复后台右上角头像 退出登录报错
+
+## 后台二次开发
+
+```
+1. 登录页面 去掉"获取体验账号"按钮
+index.vue
+<!-- <el-button style="width: 45%" type="primary" @click.native.prevent="handleTry">
+        获取体验账号
+      </el-button> -->
+2. 菜单去掉 “学习教程” “视频教程”  
+  index.js
+   {
+      name: 'document',
+      path: 'https://www.macrozheng.com',
+      meta: {title: '学习教程', icon: 'document'}
+    },
+    {
+      name: 'video',
+      path: 'https://www.macrozheng.com/mall/catalog/mall_video.html',
+      meta: {title: '视频教程', icon: 'video'}
+    },
+3. 首页去掉 学习教程 视频教程 点Star支持项目      
+4. 首页去掉 mall全套学习教程连载中！
+ <!--
+    <el-card class="mine-layout">
+      <div style="text-align: center">
+        <img width="150px" height="150px" src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg">
+      </div>
+      <div style="text-align: center">mall全套学习教程连载中！</div>
+      <div style="text-align: center;margin-top: 5px"><span class="color-main">关注公号</span>，第一时间获取。</div>
+    </el-card>
+    -->
+5. 出现近7天销售总额
+6. 修改默认头像
+要改数据库ums_admin表的数据 admin icon改为
+```
+
+## 修改 admin 密码为 admin
+
+```
+权限-》用户列表
+http://localhost:8090/#/ums/admin
+找到admin编辑 改密码为admin 保存
+退出会报错，暂未修复，可换个浏览器重新登录，当然清缓存也可以
+```
+
+
 ## 项目搭建
 
 **商城后台后端搭建**

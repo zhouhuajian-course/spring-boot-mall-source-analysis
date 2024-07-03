@@ -6,6 +6,34 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 修改后台 host 和 port
+
+```
+localhost 为 admin.shop.com
+8089 为 80
+
+mall-admin-web/config/index.js
+
+//    host: 'localhost', // can be overwritten by process.env.HOST
+//    port: 8090, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+host: 'admin.shop.com',
+port: 80,
+```
+
+## 修复后台用户退出报错
+
+```
+http://localhost:8080/admin/logout
+500 Internal Server Error
+
+问题：缺少redis
+解决：搭建redis，并配置好，重启
+https://github.com/tporadowski/redis/releases/
+Redis-x64-5.0.14.1.zip
+双击redis-server.exe运行
+不需要改配置，重启
+```
+
 ## 数据库表
 
 https://www.macrozheng.com/mall/foreword/mall_foreword_01.html#mall%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8%E6%A6%82%E8%A7%88
@@ -20,8 +48,6 @@ ums_*：会员模块相关表  (user)
 
 ms可能是manage system
 ```
-
-## 修复后台右上角头像 退出登录报错
 
 ## 后台二次开发
 

@@ -112,6 +112,9 @@
       if(this.loginForm.password === undefined||this.loginForm.password==null){
         this.loginForm.password = '';
       }
+      // added by zhouhuajian
+      this.loginForm.username = '';
+      this.loginForm.password = '';
     },
     methods: {
       showPwd() {

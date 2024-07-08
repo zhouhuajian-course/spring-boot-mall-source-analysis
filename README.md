@@ -6,6 +6,32 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 修改前台后端请求基础URL
+
+//配置API请求的基础路径  
+// export const API_BASE_URL = 'http://localhost:8085';  
+（备注：改了会很麻烦）
+
+## 修改后台登录 去掉账号密码默认值
+
+mall-admin-web/src/views/login/index.vue
+
+```
+   created() {
+      this.loginForm.username = getCookie("username");
+      this.loginForm.password = getCookie("password");
+      if(this.loginForm.username === undefined||this.loginForm.username==null||this.loginForm.username===''){
+        this.loginForm.username = 'admin';
+      }
+      if(this.loginForm.password === undefined||this.loginForm.password==null){
+        this.loginForm.password = '';
+      }
+      // added by zhouhuajian
+      this.loginForm.username = '';
+      this.loginForm.password = '';
+    },
+```
+
 ## 修改后台 host 和 port
 
 ```

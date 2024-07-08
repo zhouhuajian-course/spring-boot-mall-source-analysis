@@ -49,15 +49,21 @@ public class UmsMemberController {
     @ApiOperation("会员登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult login(@RequestParam String username,
-                              @RequestParam String password) {
+    // 登录接口
+    public CommonResult login(@RequestParam String username,  // 用户名
+                              @RequestParam String password) {  // 密码
+        // memberService login 进行登录 返回 token
         String token = memberService.login(username, password);
+        // token 为 null 登录失败
         if (token == null) {
+            // 验证失败 提示 用户名或密码错误
             return CommonResult.validateFailed("用户名或密码错误");
         }
+        // 创建 HashMap 放入 token 和 tokenHead
         Map<String, String> tokenMap = new HashMap<>();
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
+        // 登录成功
         return CommonResult.success(tokenMap);
     }
 

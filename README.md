@@ -6,6 +6,73 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 成员账号密码分析
+
+```java
+// http://localhost:8085/sso/login
+// SSO 单点登录 Single Sign-On (SSO)
+// 会员相关 Member 接口 UmsMember...
+// portal/controller/UmsMemberController.java
+// 数据库表 ums_member
+
+// 可以调register接口，注册一个
+    @ApiOperation("会员注册")
+    // 限制POST 使用curl或postman工具
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
+    // 用户名 密码 手机号 手机验证码
+    public CommonResult register(@RequestParam String username,
+                                 @RequestParam String password,
+                                 @RequestParam String telephone,
+                                 @RequestParam String authCode) {
+// chrome 开发者工具 网络 找到 login 右键 以 powershell 方式复制
+// 修改url和请求参数，telephone 和 authCode 乱写，代码改逻辑，直接通过
+```
+
+```
+$session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
+$session.UserAgent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36"
+Invoke-WebRequest -UseBasicParsing -Uri "http://localhost:8085/sso/register" `
+-Method "POST" `
+-WebSession $session `
+-Headers @{
+"Accept"="*/*"
+  "Accept-Encoding"="gzip, deflate, br, zstd"
+  "Accept-Language"="zh-CN,zh;q=0.9"
+  "Origin"="http://localhost:8060"
+  "Referer"="http://localhost:8060/"
+  "Sec-Fetch-Dest"="empty"
+  "Sec-Fetch-Mode"="cors"
+  "Sec-Fetch-Site"="same-site"
+  "sec-ch-ua"="`"Not/A)Brand`";v=`"8`", `"Chromium`";v=`"126`", `"Google Chrome`";v=`"126`""
+  "sec-ch-ua-mobile"="?1"
+  "sec-ch-ua-platform"="`"Android`""
+} `
+-ContentType "application/x-www-form-urlencoded;charset=UTF-8" `
+-Body "username=xiaoming&password=xiaoming&telephone=13500000000&authCode=1234"
+```
+
+```java
+// com.macro.mall.portal.service.impl.UmsMemberServiceImpl.register
+@Override
+public void register(String username, String password, String telephone, String authCode) {
+    //验证验证码
+    if (!verifyAuthCode(authCode, telephone)) {
+        // 注释这行代码，注册好后，改回去
+        // Asserts.fail("验证码错误");
+    }
+    // ...
+}
+```
+
+## 去掉前台登录时"获取体验账号"
+
+mall-app-web/pages/public/login.vue
+
+```html
+<!--<button class="confirm-btn2" @click="toRegist" >获取体验账号</button>-->
+```
+
 ## 后台订单列表id倒排序
 
 ```xml

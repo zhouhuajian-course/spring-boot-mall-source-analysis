@@ -78,7 +78,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     public void register(String username, String password, String telephone, String authCode) {
         //验证验证码
         if(!verifyAuthCode(authCode,telephone)){
-            Asserts.fail("验证码错误");
+            // Asserts.fail("验证码错误");
         }
         //查询是否已有该用户
         UmsMemberExample example = new UmsMemberExample();
@@ -164,8 +164,9 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     @Override
     public String login(String username, String password) {
         String token = null;
-        //密码需要客户端加密后传递
+        // 密码需要客户端加密后传递
         try {
+            // 通过用户名获取用户信息
             UserDetails userDetails = loadUserByUsername(username);
             if(!passwordEncoder.matches(password,userDetails.getPassword())){
                 throw new BadCredentialsException("密码不正确");

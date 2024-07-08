@@ -63,9 +63,11 @@ public class PmsProductController {
     @ApiOperation("查询商品")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult<CommonPage<PmsProduct>> getList(PmsProductQueryParam productQueryParam,
-                                                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
+    // 返回通用结果
+    public CommonResult<CommonPage<PmsProduct>> getList(PmsProductQueryParam productQueryParam,  // 产品查询参数
+                                                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,  // 每页显示数量
+                                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {  // 第几页
+        // 调用 productService 的 list 获取结果
         List<PmsProduct> productList = productService.list(productQueryParam, pageSize, pageNum);
         return CommonResult.success(CommonPage.restPage(productList));
     }

@@ -207,6 +207,10 @@ public class PmsProductServiceImpl implements PmsProductService {
     public List<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         PmsProductExample productExample = new PmsProductExample();
+
+        // added by zhouhuajian
+        productExample.setOrderByClause("id desc");
+
         PmsProductExample.Criteria criteria = productExample.createCriteria();
         criteria.andDeleteStatusEqualTo(0);
         if (productQueryParam.getPublishStatus() != null) {

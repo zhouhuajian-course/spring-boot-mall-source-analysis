@@ -6,6 +6,55 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 后台商品列表id倒序
+
+```java
+// http://localhost:8080/product/list?pageNum=1&pageSize=5
+// controller/PmsProductController.java
+// service/impl/PmsProductServiceImpl.java
+@Override
+public List<PmsProduct> list(PmsProductQueryParam productQueryParam, Integer pageSize, Integer pageNum) {
+    PageHelper.startPage(pageNum, pageSize);
+    PmsProductExample productExample = new PmsProductExample();
+
+    // added by zhouhuajian
+    productExample.setOrderByClause("id desc");
+    
+    // ...
+}
+
+```
+
+## 解决添加品牌Logo出错问题
+
+问题：MinIO搭建
+解决：搭建MinIO
+
+https://dl.min.io/server/minio/release/windows-amd64/minio.exe  
+放到 D:\MinIO  
+把 data 目录放项目里面 一起保存到git仓库
+D:\MinIO\minio.exe server ...\shop-com\minio-data --console-address ":9001"
+```
+API: http://192.168.31.195:9000  http://192.168.30.1:9000  http://192.168.31.1:9000  http://127.0.0.1:9000
+   RootUser: minioadmin
+   RootPass: minioadmin
+WebUI: http://192.168.31.195:9001 http://192.168.30.1:9001 http://192.168.31.1:9001 http://127.0.0.1:9001
+   RootUser: minioadmin
+   RootPass: minioadmin
+```
+
+mall-admin/src/main/resources/application-dev.yml
+
+```yml
+minio:
+  endpoint: http://localhost:9000 #MinIO服务所在地址
+  bucketName: mall #存储桶名称
+  accessKey: minioadmin #访问的key
+  secretKey: minioadmin #访问的秘钥
+```
+
+http://192.168.31.195:9001 访问管理平台
+
 ## 修改前台后端请求基础URL
 
 //配置API请求的基础路径  

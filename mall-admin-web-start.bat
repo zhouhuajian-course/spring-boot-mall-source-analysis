@@ -4,3 +4,4 @@ start npm run dev
 D:
 cd D:\Redis-x64-5.0.14.1
 start redis-server.exe
+start D:\MinIO\minio.exe server C:\Users\zhouhuajian\Desktop\pytest+selenium\shop-com\minio-data --console-address ":9001"

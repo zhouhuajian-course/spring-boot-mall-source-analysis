@@ -32,6 +32,8 @@
             OR receiver_phone LIKE concat("%",#{queryParam.receiverKeyword},"%")
             )
         </if>
+        /* added by zhouhuajian */
+        order by id desc
     </select>
     <update id="delivery">
         UPDATE oms_order

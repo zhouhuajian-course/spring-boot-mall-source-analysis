@@ -6,6 +6,34 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 提交订单 接口 报错修复
+
+http://localhost:8085/order/generateOrder
+
+原因：rabbitmq
+解决：安装rabbitmq
+
+必须先安装 Erlang  
+https://www.erlang.org/  
+下载安装包，安装  
+https://github.com/erlang/otp/releases/download/OTP-27.0/otp_win64_27.0.exe
+
+必须把计算机名改成没中文没空格的名字，否者会有各种 用到计算机名的配置、文件创建  
+
+下载 RabbitMQ 安装包 安装  
+https://www.rabbitmq.com/  
+去掉Service
+
+D:\RabbitMQ-Server\rabbitmq_server-3.13.4\sbin  
+rabbitmq-plugins.bat enable rabbitmq_management  
+rabbitmq-server.bat
+
+http://localhost:15672/ 账号密码 guest guest
+
+1. 访问 Admin Tab，创建帐号 mall mall 设置角色为管理员
+2. 创建虚拟 host ，Name 为 /mall
+3. 访问 mall 用户设置页，给 mall 用户配置该虚拟 host 的权限
+
 ## 成员账号密码分析
 
 ```java

@@ -77,7 +77,7 @@ public class PmsBrandServiceImpl implements PmsBrandService {
     public List<PmsBrand> listBrand(String keyword, Integer showStatus, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         PmsBrandExample pmsBrandExample = new PmsBrandExample();
-        pmsBrandExample.setOrderByClause("sort desc");
+        pmsBrandExample.setOrderByClause("id desc");
         PmsBrandExample.Criteria criteria = pmsBrandExample.createCriteria();
         if (!StrUtil.isEmpty(keyword)) {
             criteria.andNameLike("%" + keyword + "%");

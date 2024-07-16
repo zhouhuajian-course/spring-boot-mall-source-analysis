@@ -6,6 +6,69 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 修改 分类顺序
+
+http://localhost:8085/home/productCateList/0
+
+pms_product_category 表 sort 倒排序
+
+```
+@Override
+    public List<PmsProductCategory> getProductCateList(Long parentId) {
+        PmsProductCategoryExample example = new PmsProductCategoryExample();
+        example.createCriteria()
+                .andShowStatusEqualTo(1)
+                .andParentIdEqualTo(parentId);
+        example.setOrderByClause("sort desc");
+        return productCategoryMapper.selectByExample(example);
+    }
+```
+
+## 调整 品牌制作商直供 顺序
+
+修改 sms_home_brand  表的顺序
+
+```
+<select id="getRecommendBrandList" resultMap="com.macro.mall.mapper.PmsBrandMapper.BaseResultMap">
+        SELECT b.*
+        FROM
+            sms_home_brand hb
+            LEFT JOIN pms_brand b ON hb.brand_id = b.id
+        WHERE
+            hb.recommend_status = 1
+            AND b.show_status = 1
+        ORDER BY
+            hb.sort DESC
+        LIMIT #{offset}, #{limit}
+    </select>
+```
+
+## 商城App首页
+
+http://localhost:8085/home/content
+
+品牌制造商直供 新鲜好物 人气推荐 等都在这个接口返回
+
+## 前端UI框架
+
+import ElementUI from 'element-ui'  
+import 'element-ui/lib/theme-chalk/index.css'  
+import locale from 'element-ui/lib/locale/lang/zh-CN' // lang i18n  
+
+用了 element-ui
+
+## 打包
+
+
+
+## 品牌列表使用id倒排序
+
+pmsBrandExample.setOrderByClause("id desc");
+
+## 修复访问首页有时会空页面问题
+
+貌似没问题了
+
 ## 提交订单 接口 报错修复
 
 http://localhost:8085/order/generateOrder

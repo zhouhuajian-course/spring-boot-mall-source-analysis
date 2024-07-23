@@ -6,6 +6,111 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 添加商品 完成，提交商品
+
+点击 完成，提交商品 -》 弹出确认框 -》调用添加商品接口-》刷新页面
+
+```
+ProductRelationDetail.vue
+<el-form-item style="text-align: center">
+        <el-button size="medium" @click="handlePrev">上一步，填写商品属性</el-button>
+        <el-button type="primary" size="medium" @click="handleFinishCommit">完成，提交商品</el-button>
+      </el-form-item>
+      
+调用 handleFinishCommit
+
+handleFinishCommit(){
+        this.$emit('finishCommit',this.isEdit);
+      }
+      
+触发 finistCommmit 事件
+
+ProductDetail.vue
+      finishCommit(isEdit) {
+        // 提示
+        this.$confirm('是否要提交该产品', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          // 更新商品
+          if(isEdit){
+            updateProduct(this.$route.query.id,this.productParam).then(response=>{
+              this.$message({
+                type: 'success',
+                message: '提交成功',
+                duration:1000
+              });
+              this.$router.back();
+            });
+          // 添加商品   
+          }else{
+            createProduct(this.productParam).then(response=>{
+              this.$message({
+                type: 'success',
+                message: '提交成功',
+                duration:1000
+              });
+              // 重新加载页面 刷新页面
+              location.reload();
+            });
+          }
+        })
+      }           
+
+// 从@/api/product模块引入的createProduct,getProduct,updateProduct函数      
+import {createProduct,getProduct,updateProduct} from '@/api/product';
+      
+api/product.js     
+// 创建商品
+export function createProduct(data) {
+  return request({
+    url:'/product/create',
+    method:'post',
+    data:data
+  })
+}
+// 更新商品
+export function updateProduct(id,data) {
+  return request({
+    url:'/product/update/'+id,
+    method:'post',
+    data:data
+  })
+}
+// 获取商品信息
+export function getProduct(id) {
+  return request({
+    url:'/product/updateInfo/'+id,
+    method:'get',
+  })
+}
+```
+
+## 专题推荐 添加专题
+
+http://localhost:8080/home/recommendSubject/list?pageNum=1&pageSize=5
+
+到数据库加 专题
+
+## 修改产品分类顺序
+
+http://localhost:8080/productCategory/list/withChildren
+
+```
+PmsProductCategoryDao.xml
+<select id="listWithChildren" resultMap="listWithChildrenMap">
+    select
+        c1.id,
+        c1.name,
+        c2.id   child_id,
+        c2.name child_name
+    from pms_product_category c1 left join pms_product_category c2 on c1.id = c2.parent_id
+    where c1.parent_id = 0 
+</select>
+添加 order by c1.sort desc
+```
+
 ## 修改 分类顺序
 
 http://localhost:8085/home/productCateList/0

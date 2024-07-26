@@ -60,20 +60,20 @@ export const asyncRouterMap = [
       meta: {title: '商品列表', icon: 'product-list'}
     },
       {
-        path: 'addProduct',
+        path: 'add-product',
         name: 'addProduct',
         component: () => import('@/views/pms/product/add'),
         meta: {title: '添加商品', icon: 'product-add'}
       },
       {
-        path: 'updateProduct',
+        path: 'update-product',
         name: 'updateProduct',
         component: () => import('@/views/pms/product/update'),
         meta: {title: '修改商品', icon: 'product-add'},
         hidden: true
       },
       {
-        path: 'productCate',
+        path: 'product-cate',
         name: 'productCate',
         component: () => import('@/views/pms/productCate/index'),
         meta: {title: '商品分类', icon: 'product-cate'}
@@ -93,7 +93,7 @@ export const asyncRouterMap = [
         hidden: true
       },
       {
-        path: 'productAttr',
+        path: 'product-attr',
         name: 'productAttr',
         component: () => import('@/views/pms/productAttr/index'),
         meta: {title: '商品类型', icon: 'product-attr'}
@@ -126,14 +126,14 @@ export const asyncRouterMap = [
         meta: {title: '品牌管理', icon: 'product-brand'}
       },
       {
-        path: 'addBrand',
+        path: 'add-brand',
         name: 'addBrand',
         component: () => import('@/views/pms/brand/add'),
         meta: {title: '添加品牌'},
         hidden: true
       },
       {
-        path: 'updateBrand',
+        path: 'update-brand',
         name: 'updateBrand',
         component: () => import('@/views/pms/brand/update'),
         meta: {title: '编辑品牌'},
@@ -169,7 +169,7 @@ export const asyncRouterMap = [
         hidden:true
       },
       {
-        path: 'orderSetting',
+        path: 'order-setting',
         name: 'orderSetting',
         component: () => import('@/views/oms/order/setting'),
         meta: {title: '订单设置', icon: 'order-setting'}

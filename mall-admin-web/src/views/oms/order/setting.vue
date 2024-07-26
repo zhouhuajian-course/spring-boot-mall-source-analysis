@@ -37,91 +37,108 @@
       <el-form-item>
         <el-button
           @click="confirm('orderSettingForm')"
-          type="primary">提交</el-button>
+          type="primary">提交
+        </el-button>
       </el-form-item>
     </el-form>
   </el-card>
 </template>
 <script>
-  import {getOrderSetting,updateOrderSetting} from '@/api/orderSetting';
-  const defaultOrderSetting = {
-    id: null,
-    flashOrderOvertime: 0,
-    normalOrderOvertime: 0,
-    confirmOvertime: 0,
-    finishOvertime: 0,
-    commentOvertime: 0
-  };
-  const checkTime = (rule, value, callback) => {
-    if (!value) {
-      return callback(new Error('时间不能为空'));
+import {getOrderSetting, updateOrderSetting} from '@/api/orderSetting';
+
+const defaultOrderSetting = {
+  id: null,
+  flashOrderOvertime: 0,
+  normalOrderOvertime: 0,
+  confirmOvertime: 0,
+  finishOvertime: 0,
+  commentOvertime: 0
+};
+const checkTime = (rule, value, callback) => {
+  value = String(value)
+  const reg = /^[1-9][0-9]*$/
+  if (!reg.test(value)) {
+    callback(new Error("请输入大于0的正整数"))
+  } else {
+    callback()
+  }
+  // if (!value) {
+  //   return callback(new Error('不能为空'));
+  // }
+  // console.log("checkTime", value, typeof value);
+  // if (typeof value === "string" && value.indexOf(".") !== -1) {
+  //   return callback(new Error('不能包含小数'));
+  // }
+  // let intVal = parseInt(value);
+  // if (!Number.isInteger(intVal)) {
+  //   return callback(new Error('只能填写数字'));
+  // } else if (intVal < 0) {
+  //   return callback(new Error('不能填写负数'));
+  // } else if (intVal === 0) {
+  //   return callback(new Error('不能填写零'));
+  // }
+  // callback();
+};
+export default {
+  name: 'orderSetting',
+  data() {
+    return {
+      orderSetting: Object.assign({}, defaultOrderSetting),
+      rules: {
+        flashOrderOvertime: {validator: checkTime, trigger: 'blur'},
+        normalOrderOvertime: {validator: checkTime, trigger: 'blur'},
+        confirmOvertime: {validator: checkTime, trigger: 'blur'},
+        finishOvertime: {validator: checkTime, trigger: 'blur'},
+        commentOvertime: {validator: checkTime, trigger: 'blur'}
+      }
     }
-    console.log("checkTime",value);
-    let intValue = parseInt(value);
-    if (!Number.isInteger(intValue)) {
-      return callback(new Error('请输入数字值'));
-    }
-    callback();
-  };
-  export default {
-    name: 'orderSetting',
-    data() {
-      return {
-        orderSetting: Object.assign({}, defaultOrderSetting),
-        rules: {
-          flashOrderOvertime:{validator: checkTime, trigger: 'blur' },
-          normalOrderOvertime:{validator: checkTime, trigger: 'blur' },
-          confirmOvertime: {validator: checkTime, trigger: 'blur' },
-          finishOvertime: {validator: checkTime, trigger: 'blur' },
-          commentOvertime:{validator: checkTime, trigger: 'blur' }
+  },
+  created() {
+    this.getDetail();
+  },
+  methods: {
+    confirm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.$confirm('是否要提交修改?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            updateOrderSetting(1, this.orderSetting).then(response => {
+              this.$message({
+                type: 'success',
+                message: '提交成功!',
+                duration: 1000
+              });
+            })
+          });
+        } else {
+          this.$message({
+            message: '请填写正确后再提交',
+            type: 'warning',
+            duration: 5000
+          });
+          return false;
         }
-      }
+      });
     },
-    created(){
-      this.getDetail();
-    },
-    methods:{
-      confirm(formName){
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            this.$confirm('是否要提交修改?', '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(() => {
-              updateOrderSetting(1,this.orderSetting).then(response=>{
-                this.$message({
-                  type: 'success',
-                  message: '提交成功!',
-                  duration:1000
-                });
-              })
-            });
-          } else {
-            this.$message({
-              message: '提交参数不合法',
-              type: 'warning'
-            });
-            return false;
-          }
-        });
-      },
-      getDetail(){
-        getOrderSetting(1).then(response=>{
-          this.orderSetting=response.data;
-        })
-      }
+    getDetail() {
+      getOrderSetting(1).then(response => {
+        this.orderSetting = response.data;
+      })
     }
   }
+}
 </script>
 <style scoped>
-  .input-width {
-    width: 50%;
-  }
+.input-width {
+  width: 50%;
+}
 
-  .note-margin {
-    margin-left: 15px;
-  }
+.note-margin {
+  margin-left: 15px;
+}
 </style>
 
 

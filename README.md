@@ -6,6 +6,61 @@ https://github.com/macrozheng/mall
 https://github.com/macrozheng/mall-admin-web  
 https://www.macrozheng.com/mall/deploy/mall_deploy_windows.html
 
+## 备注
+
+很多接口逻辑并不完善，商城功能也不完善，命名也不是太规范，更推荐研究国外的开源商城，不过也有很多可以值得学习的地方，还是挺可以的一个开源项目
+
+## 订单设置 小驼峰命名 改 横线命名
+
+```java
+// OmsOrderSettingController.java
+@Controller
+@Api(tags = "OmsOrderSettingController")
+@Tag(name = "OmsOrderSettingController", description = "订单设置管理")
+//@RequestMapping("/orderSetting")
+@RequestMapping("/order-setting")
+public class OmsOrderSettingController {
+    // ...
+}
+```
+
+```
+// orderSetting.js
+import request from '@/utils/request'
+export function getOrderSetting(id) {
+  return request({
+    // url:'/orderSetting/'+id,
+    url:'/order-setting/'+id,
+    method:'get',
+  })
+}
+
+export function updateOrderSetting(id,data) {
+  return request({
+    // url:'/orderSetting/update/'+id,
+    url:'/order-setting/update/'+id,
+    method:'post',
+    data:data
+  })
+}
+```
+
+
+## 订单设置
+
+```
+请求网址: http://localhost:8080/orderSetting/update/1
+请求方法: POST
+
+{"id":1,"flashOrderOvertime":60,"normalOrderOvertime":120,"confirmOvertime":15,"finishOvertime":7,"commentOvertime":7}
+
+{"code":200,"message":"操作成功","data":1}
+```
+
+## URL路径 小驼峰命名法 改成 横线命名法
+
+mall-admin-web/src/router/index.js
+
 ## 添加商品 完成，提交商品
 
 点击 完成，提交商品 -》 弹出确认框 -》调用添加商品接口-》刷新页面

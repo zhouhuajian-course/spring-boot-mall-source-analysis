@@ -581,7 +581,7 @@
         });
       },
       handleUpdateProduct(index,row){
-        this.$router.push({path:'/pms/updateProduct',query:{id:row.id}});
+        this.$router.push({path:'/pms/update-product',query:{id:row.id}});
       },
       handleShowProduct(index,row){
         console.log("handleShowProduct",row);

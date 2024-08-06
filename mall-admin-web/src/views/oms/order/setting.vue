@@ -48,11 +48,16 @@ import {getOrderSetting, updateOrderSetting} from '@/api/orderSetting';
 
 const defaultOrderSetting = {
   id: null,
-  flashOrderOvertime: 0,
-  normalOrderOvertime: 0,
-  confirmOvertime: 0,
-  finishOvertime: 0,
-  commentOvertime: 0
+  flashOrderOvertime: null,
+  normalOrderOvertime: null,
+  confirmOvertime: null,
+  finishOvertime: null,
+  commentOvertime: null,
+  // flashOrderOvertime: 0,
+  // normalOrderOvertime: 0,
+  // confirmOvertime: 0,
+  // finishOvertime: 0,
+  // commentOvertime: 0
 };
 const checkTime = (rule, value, callback) => {
   value = String(value)

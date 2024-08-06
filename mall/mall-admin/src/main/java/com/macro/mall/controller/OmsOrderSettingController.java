@@ -23,10 +23,15 @@ public class OmsOrderSettingController {
     @Autowired
     private OmsOrderSettingService orderSettingService;
 
-    @ApiOperation("获取指定订单设置")
+    @ApiOperation("获取订单设置")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<OmsOrderSetting> getItem(@PathVariable Long id) {
+//        try {
+//            Thread.sleep(3000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         OmsOrderSetting orderSetting = orderSettingService.getItem(id);
         return CommonResult.success(orderSetting);
     }
